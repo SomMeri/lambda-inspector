@@ -8,15 +8,12 @@ Java lamdas provide nice syntax to declare a piece of code which can be passed a
 For details see [Blog Post 1](https://ruediste.github.io/bytecode/2017/02/25/lambda-inspection.html) and [Blog Post 2](https://ruediste.github.io/bytecode/2017/03/08/lambda-parsing.html).
 
 ## Usage
+The original repo where this was uploaded does not exist anymore. Therefore, you have to clone the 
+project and run `mvn clean install` in the root.
+
 Add the following maven repository and dependency to your pom.xml:
 
 ``` xml
-<repositories>
-  <repository>
-	<id>mvnzone</id>
-	<url>https://repo.mvnzone.net/repo</url>
-  </repository>
-</repositories>
 <dependencies>
   <dependency>
     <groupId>com.github.ruediste.lambda-inspector</groupId>
@@ -36,3 +33,17 @@ String getInvokedMethodName(Runnable lambda) {
 ...
 assertEquals("length", getInvokedMethodName(() -> "".length()));
 ```
+
+To print source code location, use this:
+````java
+    Lambda inspect = LambdaInspector.inspect(inter);
+    LambdaPrinter.printSourceCodeLocation(inspect);
+````
+
+it will print something like this:
+````
+com.github.ruediste.lambdaInspector.Lambda@78e67e0a
+private static java.lang.String com.meri.test.App.lambda$0(java.lang.String)
+java class is com.meri.test.App
+method lambda$0 is on line 60
+````
